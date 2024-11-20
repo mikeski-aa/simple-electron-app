@@ -1,3 +1,5 @@
+const { contextBridge } = require("electron");
+
 window.addEventListener("DOMContentLoaded", () => {
   const replaceText = (selector, text) => {
     const element = document.getElementById(selector);
@@ -7,4 +9,8 @@ window.addEventListener("DOMContentLoaded", () => {
       replaceText(`${dependency}-version`, process.versions[dependency]);
     }
   };
+});
+
+contextBridge.exposeInMainWorld("electronAPI", {
+  showAlert: () => alert("Button clicked!"),
 });
